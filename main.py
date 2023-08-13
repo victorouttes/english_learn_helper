@@ -18,15 +18,13 @@ def combine_files():
             my_lyrics_row = my_lyrics_row.replace('\n', '').strip()
             official_lyrics_row = official_lyrics_row.replace('\n', '').strip()
 
-            paragraph_1 = result.add_paragraph(my_lyrics_row)
-            for run in paragraph_1.runs:
-                run.font.color.rgb = RGBColor(255, 0, 0)
+            paragraph = result.add_paragraph()
 
-            paragraph_2 = result.add_paragraph(official_lyrics_row)
-            for run in paragraph_2.runs:
-                run.font.color.rgb = RGBColor(0, 0, 255)
-
-            result.add_paragraph('')
+            run1 = paragraph.add_run(my_lyrics_row)
+            run1.font.color.rgb = RGBColor(255, 0, 0)
+            paragraph.add_run('\n')
+            run2 = paragraph.add_run(official_lyrics_row)
+            run2.font.color.rgb = RGBColor(0, 0, 255)
 
             partial = fuzz.ratio(my_lyrics_row, official_lyrics_row)
             scores.append(partial)
